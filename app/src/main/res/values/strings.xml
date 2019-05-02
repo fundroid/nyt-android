@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">My Application</string>
+    <string name="title_article_list">Articles</string>
+    <string name="title_article_detail">Article Detail</string>
+    <string name="title_activity_main">Top Articles</string>
+    <string name="action_settings">Settings</string>
 </resources>
