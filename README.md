@@ -5,11 +5,10 @@ This is a simple Android Application to consume the NY Times Most Popular Articl
 ## Installation
 Clone this repository and import into **Android Studio**
 ```bash
-https://github.com/fundroid/nyt-android-sample.git```
+git@github.com:fundroid/nyt-android.git```
 or 
 ```bash
-https://github.com/fundroid/nyt-android-sample.git
-```
+https://github.com/fundroid/nyt-android.git```
 
 ## Generating signed APK
 From Android Studio:
