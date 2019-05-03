@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.nyt.R;
+import com.nyt.utils.Constants;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -27,6 +28,6 @@ public class CategoryViewHolder extends RecyclerView.ViewHolder implements View.
 
     @Override
     public void onClick(View v) {
-        listener.onCategoryClick(categoryTitle.getText().toString());
+        listener.onDaysClick(Constants.DEFAULT_SEARCH_DAYS[getAdapterPosition()]);
     }
 }

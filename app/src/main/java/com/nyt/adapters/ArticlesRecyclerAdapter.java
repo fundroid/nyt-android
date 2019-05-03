@@ -10,12 +10,11 @@ import android.view.ViewGroup;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.nyt.R;
-import com.nyt.models.Result;
+import com.nyt.models.Article;
 import com.nyt.utils.Constants;
 
 import java.util.ArrayList;
 import java.util.List;
-
 
 public class ArticlesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -24,7 +23,7 @@ public class ArticlesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     private static final int CATEGORY_TYPE = 3;
     private static final int EXHAUSTED_TYPE = 4;
 
-    private List<Result> mArticles;
+    private List<Article> mArticles;
     private OnArticleListener mOnArticleListener;
 
     public ArticlesRecyclerAdapter(OnArticleListener mOnArticleListener) {
@@ -114,30 +113,11 @@ public class ArticlesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         }
     }
 
-    public void setQueryExhausted() {
-        hideLoading();
-        Result exhaustedArticle = new Result();
-        exhaustedArticle.title = "EXHAUSTED...";
-        mArticles.add(exhaustedArticle);
-        notifyDataSetChanged();
-    }
-
-    private void hideLoading() {
-        if (isLoading()) {
-            for (Result article : mArticles) {
-                if (article.title.equals("LOADING...")) {
-                    mArticles.remove(article);
-                }
-            }
-            notifyDataSetChanged();
-        }
-    }
-
     public void displayLoading() {
         if (!isLoading()) {
-            Result article = new Result();
+            Article article = new Article();
             article.title = "LOADING...";
-            List<Result> loadingList = new ArrayList<>();
+            List<Article> loadingList = new ArrayList<>();
             loadingList.add(article);
             mArticles = loadingList;
             notifyDataSetChanged();
@@ -154,9 +134,9 @@ public class ArticlesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
     }
 
     public void displaySearchCategories() {
-        List<Result> categories = new ArrayList<>();
+        List<Article> categories = new ArrayList<>();
         for (int i = 0; i < Constants.DEFAULT_SEARCH_CATEGORIES.length; i++) {
-            Result article = new Result();
+            Article article = new Article();
             article.title = Constants.DEFAULT_SEARCH_CATEGORIES[i];
             article.views = -1;
             categories.add(article);
@@ -173,12 +153,12 @@ public class ArticlesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
         return 0;
     }
 
-    public void setArticles(List<Result> articles) {
+    public void setArticles(List<Article> articles) {
         mArticles = articles;
         notifyDataSetChanged();
     }
 
-    public Result getSelectedArticle(int position) {
+    public Article getSelectedArticle(int position) {
         if (mArticles != null) {
             if (mArticles.size() > 0) {
                 return mArticles.get(position);

@@ -13,4 +13,8 @@ public class Constants {
             "Last Week",
             "Last Month"
     };
+
+    public static final int[] DEFAULT_SEARCH_DAYS = {
+            1, 7, 30
+    };
 }

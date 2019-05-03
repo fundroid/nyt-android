@@ -3,7 +3,7 @@ package com.nyt.network.responses;
 
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
-import com.nyt.models.Result;
+import com.nyt.models.Article;
 
 import java.io.Serializable;
 import java.util.List;
@@ -21,7 +21,7 @@ public class ArticleResponse implements Serializable {
     public Long numResults;
     @SerializedName("results")
     @Expose
-    public List<Result> results = null;
+    public List<Article> results = null;
     private final static long serialVersionUID = 8690888635746283891L;
 
 }

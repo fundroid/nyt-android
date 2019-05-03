@@ -3,7 +3,7 @@ package com.nyt.viewmodels;
 import android.arch.lifecycle.LiveData;
 import android.arch.lifecycle.ViewModel;
 
-import com.nyt.models.Result;
+import com.nyt.models.Article;
 import com.nyt.repositories.ArticleRepository;
 
 import java.util.List;
@@ -19,26 +19,14 @@ public class ArticleListViewModel extends ViewModel {
         mIsPerformingQuery = false;
     }
 
-    public LiveData<List<Result>> getArticles(){
+    public LiveData<List<Article>> getArticles(){
         return mArticleRepository.getArticles();
     }
 
-    public LiveData<Boolean> isQueryExhausted(){
-        return mArticleRepository.isQueryExhausted();
-    }
-
-    public void searchArticlesApi(int days, int pageNumber){
+    public void searchArticlesApi(int days){
         mIsViewingArticles = true;
         mIsPerformingQuery = true;
-        mArticleRepository.searchArticlesApi(days, pageNumber);
-    }
-
-    public void searchNextPage(){
-        if(!mIsPerformingQuery
-                && mIsViewingArticles
-                && !isQueryExhausted().getValue()){
-            mArticleRepository.searchNextPage();
-        }
+        mArticleRepository.searchArticlesApi(days);
     }
 
     public boolean isViewingArticles(){
@@ -51,10 +39,6 @@ public class ArticleListViewModel extends ViewModel {
 
     public void setIsPerformingQuery(Boolean isPerformingQuery){
         mIsPerformingQuery = isPerformingQuery;
-    }
-
-    public boolean isPerformingQuery(){
-        return mIsPerformingQuery;
     }
 
     public boolean onBackPressed(){

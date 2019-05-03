@@ -4,7 +4,6 @@ import android.arch.lifecycle.Observer;
 import android.arch.lifecycle.ViewModelProviders;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,7 +12,7 @@ import android.util.Log;
 import com.nyt.R;
 import com.nyt.adapters.ArticlesRecyclerAdapter;
 import com.nyt.adapters.OnArticleListener;
-import com.nyt.models.Result;
+import com.nyt.models.Article;
 import com.nyt.utils.Testing;
 import com.nyt.utils.VerticalSpacingItemDecorator;
 import com.nyt.viewmodels.ArticleListViewModel;
@@ -43,9 +42,9 @@ public class ArticleListActivity extends BaseActivity implements OnArticleListen
     }
 
     private void subscribeObservers() {
-        mArticleListViewModel.getArticles().observe(this, new Observer<List<Result>>() {
+        mArticleListViewModel.getArticles().observe(this, new Observer<List<Article>>() {
             @Override
-            public void onChanged(@Nullable List<Result> articles) {
+            public void onChanged(@Nullable List<Article> articles) {
                 if (articles != null) {
                     Log.d(TAG, "articles size : " + articles.size());
                     if (mArticleListViewModel.isViewingArticles()) {
@@ -57,15 +56,6 @@ public class ArticleListActivity extends BaseActivity implements OnArticleListen
             }
         });
 
-        mArticleListViewModel.isQueryExhausted().observe(this, new Observer<Boolean>() {
-            @Override
-            public void onChanged(@Nullable Boolean aBoolean) {
-                Log.d(TAG, "onChanged: the query is exhausted..." + aBoolean);
-                if (aBoolean) {
-                    mAdapter.setQueryExhausted();
-                }
-            }
-        });
     }
 
     private void initRecyclerView() {
@@ -75,15 +65,6 @@ public class ArticleListActivity extends BaseActivity implements OnArticleListen
         mRecyclerView.setAdapter(mAdapter);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        mRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
-            @Override
-            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
-                if (!mRecyclerView.canScrollVertically(1)) {
-                    // search the next page
-                    mArticleListViewModel.searchNextPage();
-                }
-            }
-        });
     }
 
     private void displaySearchCategories() {
@@ -93,17 +74,18 @@ public class ArticleListActivity extends BaseActivity implements OnArticleListen
 
     @Override
     public void onArticleClick(int position) {
-        Log.d(TAG, "Result clicked");
+        Log.d(TAG, "Article clicked");
         Intent intent = new Intent(this, ArticleActivity.class);
-        intent.putExtra("Result", mAdapter.getSelectedArticle(position));
+        intent.putExtra("article", mAdapter.getSelectedArticle(position));
         startActivity(intent);
     }
 
     @Override
-    public void onCategoryClick(String category) {
-        Log.d(TAG, "category clicked" + category);
+    public void onDaysClick(int days) {
+        Log.d(TAG, "category clicked" + days);
+
         mAdapter.displayLoading();
-        mArticleListViewModel.searchArticlesApi(1, 1);
+        mArticleListViewModel.searchArticlesApi(days);
     }
 
     @Override
