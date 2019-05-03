@@ -42,9 +42,9 @@ public class Article implements Serializable {
     @SerializedName("views")
     @Expose
     public int views;
-    @SerializedName("media")
-    @Expose
-    public List<Media> media = null;
+//    @SerializedName("media")
+//    @Expose
+//    public List<Media> media = null;
 
     private final static long serialVersionUID = -6964970351707308230L;
 

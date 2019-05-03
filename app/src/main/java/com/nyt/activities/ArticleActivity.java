@@ -48,10 +48,10 @@ public class ArticleActivity extends BaseActivity {
             RequestOptions requestOptions = new RequestOptions()
                     .placeholder(R.drawable.ic_launcher_background);
 
-            Glide.with(this)
-                    .setDefaultRequestOptions(requestOptions)
-                    .load(article.media.get(0).mediaMetadata.get(2).url)
-                    .into(mArticleImage);
+//            Glide.with(this)
+//                    .setDefaultRequestOptions(requestOptions)
+//                    .load(article.media.get(0).mediaMetadata.get(2).url)
+//                    .into(mArticleImage);
 
             mArticleTitle.setText(article.title);
             mArticleViews.setText(String.valueOf(article.views));

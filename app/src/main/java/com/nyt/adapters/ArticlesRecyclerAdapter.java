@@ -71,12 +71,12 @@ public class ArticlesRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.V
             RequestOptions requestOptions = new RequestOptions()
                     .placeholder(R.drawable.ic_launcher_background);
 
-            Log.d("NYT", "image : " + mArticles.get(i).media.get(0).mediaMetadata.get(1).url);
-
-            Glide.with(viewHolder.itemView.getContext())
-                    .setDefaultRequestOptions(requestOptions)
-                    .load(mArticles.get(i).media.get(0).mediaMetadata.get(0).url)
-                    .into(((ArticleViewHolder) viewHolder).image);
+//            Log.d("NYT", "image : " + mArticles.get(i).media.get(0).mediaMetadata.get(1).url);
+//
+//            Glide.with(viewHolder.itemView.getContext())
+//                    .setDefaultRequestOptions(requestOptions)
+//                    .load(mArticles.get(i).media.get(0).mediaMetadata.get(0).url)
+//                    .into(((ArticleViewHolder) viewHolder).image);
 
             ((ArticleViewHolder) viewHolder).title.setText(mArticles.get(i).title);
 //            ((ArticleViewHolder) viewHolder).publisher.setText(mArticles.get(i).source);
